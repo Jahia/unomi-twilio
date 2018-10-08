@@ -36,11 +36,10 @@ import java.util.Map;
  * @author dgaillard
  */
 public class TwilioCallAction implements ActionExecutor {
-    public static final String VISITOR_PHONE_NUMBER = "visitorPhoneNumber";
-
     private static Logger logger = LoggerFactory.getLogger(TwilioCallAction.class);
 
-    public static final String DEMO_VOICE_URL = "http://6cebf511.eu.ngrok.io/tracker/voice.xml";
+    public static final String VISITOR_PHONE_NUMBER = "visitorPhoneNumber";
+    public static final String DEMO_VOICE_URL = "http://demo.twilio.com/docs/voice.xml";
 
     private String twilioAccountSid;
     private String twilioAuthToken;
@@ -57,8 +56,6 @@ public class TwilioCallAction implements ActionExecutor {
             return EventService.NO_CHANGE;
         }
 
-        Twilio.init(twilioAccountSid, twilioAuthToken);
-
         URI textUrl;
         try {
             textUrl = new URI(DEMO_VOICE_URL);
@@ -67,8 +64,8 @@ public class TwilioCallAction implements ActionExecutor {
             return EventService.NO_CHANGE;
         }
 
-        Call call = Call.creator(new PhoneNumber(parameterValues.get(VISITOR_PHONE_NUMBER).toString()), new PhoneNumber(twilioPhoneNumber),
-                textUrl).create();
+        Twilio.init(twilioAccountSid, twilioAuthToken);
+        Call call = Call.creator(new PhoneNumber(parameterValues.get(VISITOR_PHONE_NUMBER).toString()), new PhoneNumber(twilioPhoneNumber), textUrl).create();
 
         logger.info(call.getSid());
 
