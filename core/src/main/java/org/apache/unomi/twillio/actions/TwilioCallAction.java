@@ -38,8 +38,8 @@ import java.util.Map;
 public class TwilioCallAction implements ActionExecutor {
     private static Logger logger = LoggerFactory.getLogger(TwilioCallAction.class);
 
-    public static final String VISITOR_PHONE_NUMBER = "visitorPhoneNumber";
-    public static final String DEMO_VOICE_URL = "http://demo.twilio.com/docs/voice.xml";
+    private static final String VISITOR_PHONE_NUMBER = "visitorPhoneNumber";
+    private static final String DEMO_VOICE_URL = "http://demo.twilio.com/docs/voice.xml";
 
     private String twilioAccountSid;
     private String twilioAuthToken;
